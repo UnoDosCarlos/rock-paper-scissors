@@ -14,9 +14,16 @@ function getComputerChoice() {
 
 function getHumanChoice() {
 
-let humanChoice = prompt("Choose: Paper, Rock, or Scissors?");
 
-let humanAnswer = humanChoice.toLowerCase();
+
+
+
+
+
+
+
+
+//let humanChoice = prompt("Choose: Paper, Rock, or Scissors?");
 
 return humanAnswer;
 }
@@ -57,14 +64,6 @@ function playGame() {
     }
 
 playRound(humanSelection, computerSelection);
-
-playRound(getHumanChoice(), getComputerChoice());
-
-playRound(getHumanChoice(), getComputerChoice());
-
-playRound(getHumanChoice(), getComputerChoice());
-
-playRound(getHumanChoice(), getComputerChoice());
 
 console.log(`Final score is: User:${humanScore} and Computer:${computerScore}`);
 
