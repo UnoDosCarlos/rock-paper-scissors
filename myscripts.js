@@ -12,13 +12,6 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-
-
-//let humanChoice = prompt("Choose: Paper, Rock, or Scissors?");
-
-}
-
 const containerTwo = document.querySelector('#container-two');
 const button = document.querySelectorAll('button');
 const paperButton = document.querySelector('#paperButton');
@@ -29,7 +22,7 @@ const winnerAnnounced = document.querySelector('#winnerAnnounced');
 const results = document.querySelector('#results');
 
 
-let humanSelection = getHumanChoice();
+let humanSelection;
 let computerSelection = getComputerChoice();
 let humanScore = 0;
 let computerScore = 0;
@@ -63,7 +56,7 @@ function playRound(humanSelection, computerSelection) {
     }
 
 
-button.forEach(function(button) {
+button.forEach((button) => {
         button.addEventListener('click', () => {
 
             if(button.id === paperButton) {
@@ -77,23 +70,55 @@ button.forEach(function(button) {
             playRound(`${humanSelection}`, getComputerChoice());
             
 scoreboard.textContent = `Human Score: ${humanScore} Computer Score: ${computerScore}`;
+            finalResult();
+        })
+    })
+
+
+function finalResult () {
 
 if( humanScore == 5) {
 
     winnerAnnounced.textContent = "The Winner is the Humans! Suck it Skynet!";
+    disableButtons(true);
+    reset();
     
     } else if( computerScore == 5) {
     
     winnerAnnounced.textContent = "The Winner is the Machines! Should have taken the blue pill!";
-    
+    disableButtons(true);
+    reset();
     }
 
 
-});
-});
+};
+
+
+function disableButtons(state) {
+        button.forEach(button => {
+            button.disabled = state;
+        })
+
+}
 
 
 
 
 
 
+function reset () {
+        const resetBtn = document.createElement('button');
+        resetBtn.classList.add('button-reset');
+        resetBtn.textContent = "Play again";
+        winnerAnnounced.appendChild(resetBtn);
+
+        resetBtn.addEventListener('click', () => {
+            humanScore = 0;
+            computerScore = 0;
+            winnerAnnounced.textContent = '';
+            results.textContent = '';
+            scoreboard.textContent = '';
+            disableButtons(false);
+            resetBtn.remove();
+        })
+}
